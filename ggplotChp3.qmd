@@ -1,0 +1,49 @@
+---
+title: "ggplotChp3"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| message: false
+library(tidyverse)
+library(ggpubr)
+```
+
+##`ggplot()´
+
+```{r}
+ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
+  geom_point()
+```
+
+```{r}
+# gir samme ressultat som ovenfor, formulert annerledes
+ggplot() +
+  geom_point(data = mtcars, mapping = aes(x = disp, y = mpg))
+```
+
+```{r}
+mtcars
+```
+
+Hva skjer hvis vi har spesifisert \``aes()´både som default i innledende`\`ggplot()´ og i påfølgende \`geom\_´
+
+```{r}
+## combine aes
+gg3 <-   ggplot(
+  data = mtcars,
+  mapping = aes(
+    x = disp, 
+    y = hp
+    )
+  ) +
+  ##  geom_point(data = mtcars, mapping = aes(y = mpg), col = 'blue')
+  geom_point(
+    # overstyrer det som er satt for y-aksen i innledende `ggplot()´
+    mapping = aes(
+      y = mpg
+      )
+    )
+```
