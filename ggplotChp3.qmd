@@ -9,9 +9,13 @@ editor: visual
 #| message: false
 library(tidyverse)
 library(ggpubr)
+
+options(
+  paged.print = FALSE
+)
 ```
 
-##`ggplot()´
+## `ggplot()`
 
 ```{r}
 ggplot(data = mtcars, mapping = aes(x = disp, y = mpg)) +
@@ -28,22 +32,94 @@ ggplot() +
 mtcars
 ```
 
-Hva skjer hvis vi har spesifisert \``aes()´både som default i innledende`\`ggplot()´ og i påfølgende \`geom\_´
+Hva skjer hvis vi har spesifisert `aes()` både som default i innledene `ggplot()` og i påfølgende `geom_`?
+
 
 ```{r}
 ## combine aes
-gg3 <-   ggplot(
+ggplot(
   data = mtcars,
   mapping = aes(
-    x = disp, 
     y = hp
-    )
+  )
   ) +
-  ##  geom_point(data = mtcars, mapping = aes(y = mpg), col = 'blue')
   geom_point(
-    # overstyrer det som er satt for y-aksen i innledende `ggplot()´
+    # overstyrer det som er satt for y-aksen i innledene ggplot()
     mapping = aes(
+      x = disp,
       y = mpg
       )
     )
 ```
+
+### Bruk av farge på kategorivariabel
+
+```{r}
+## combine aes
+ggplot(
+  data = mtcars
+  ) +
+  geom_point(
+    # overstyrer det som er satt for y-aksen i innledene ggplot()
+    mapping = aes(
+      x = disp,
+      y = mpg,
+      colour = fct(as.character(cyl))
+      )
+    )
+```
+
+### Bruk av form på kategorivariabel
+
+```{r}
+## combine aes
+ggplot(
+  data = mtcars
+  ) +
+  geom_point(
+    # overstyrer det som er satt for y-aksen i innledene ggplot()
+    mapping = aes(
+      x = disp,
+      y = mpg,
+      shape = fct(as.character(cyl))
+      )
+    )
+```
+
+### Bruk av størrelse på kategorivariabel
+
+```{r}
+## combine aes
+ggplot(
+  data = mtcars
+  ) +
+  geom_point(
+    # overstyrer det som er satt for y-aksen i innledene ggplot()
+    mapping = aes(
+      x = disp,
+      y = mpg,
+      size = fct(as.character(cyl), levels = c("4", "6", "8"))
+      )
+    )
+```
+
+```{r}
+## combine aes
+ggplot(
+  data = mtcars
+  ) +
+  geom_point(
+    # overstyrer det som er satt for y-aksen i innledene ggplot()
+    mapping = aes(
+      x = disp,
+      y = mpg,
+      colour = fct(as.character(cyl), levels = c("4", "6", "8")),
+      shape = fct(as.character(cyl), levels = c("4", "6", "8"))
+      )
+    )
+```
+```{r}
+mtcars |> 
+  as_tibble()
+```
+
