@@ -19,8 +19,7 @@ options(
 
 ## Lese inn Excel
 
-Wide format. 
-Ikke så hensiktsmessig.
+Wide format. Ikke så hensiktsmessig.
 
 ```{r}
 #| message: false
@@ -54,7 +53,6 @@ t10540xlsx_long <- t10540xlsx_long[1:48,]
 names(t10540xlsx_long)[-1] <- paste0("k", names(t10540xlsx_long)[-1])
 ```
 
-
 ```{r}
 class(t10540xlsx_long)
 ```
@@ -81,11 +79,13 @@ dim(t10540xlsx_long[,5])
 ```{r}
 median(t10540xlsx_long$`k1106 Haugesund`)
 ```
+
 ```{r}
 median(as.numeric(t10540xlsx_long$`k1106 Haugesund`))
 ```
 
 ## Regne ut median
+
 ```{r}
 median(as.numeric(t10540xlsx_long$`k1106 Haugesund`))
 ```
@@ -115,12 +115,13 @@ median(
 median(as.numeric(pluck(.x = t10540xlsx_long, "k1106 Haugesund")))
 ```
 
-## Safe names 
+## Safe names
 
 ```{r}
 # make.names() lager "trygge" objektnavn
 make.names(names(t10540xlsx_long))
 ```
+
 ```{r}
 # setter nye variabelnavn i t10540xlsx_long
 names(t10540xlsx_long) <- make.names(names(t10540xlsx_long))
@@ -161,7 +162,7 @@ tmp <- read.csv(
 )
 ```
 
-In Terminal: file ./Data/10540long.csv  ./Data/10540long.csv: ISO-8859 text, with very long lines (1429), with CRLF line terminators
+In Terminal: file ./Data/10540long.csv ./Data/10540long.csv: ISO-8859 text, with very long lines (1429), with CRLF line terminators
 
 ```{r}
 #| eval: false
@@ -174,6 +175,7 @@ tmp <- read.csv(
   dec = "."
 )
 ```
+
 ```{r}
 #| eval: false
 `10540long` <- read.csv("~/Dev/FirstRepoH26/Data/10540long.csv", encoding="ISO_8859-1", row.names=1, sep=";", comment.char="#")
@@ -396,7 +398,7 @@ metadata_12448 <- ApiData(
   )
 ```
 
-### sykefravær 
+### sykefravær
 
 ```{r}
 syk00to09_tmp <- ApiData12(
@@ -430,4 +432,3 @@ syk00to09_tmp <- ApiData12(
   # convert from dataframe to tibble
   as_tibble()
 ```
-
